@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Visual Novel</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: Georgia, serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game {
+            height: 100vh;
+            position: relative;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.25),
+                    rgba(0,0,0,0.45)
+                ),
+                url("https://placehold.co/1920x1080/202040/ffffff?text=BACKGROUND");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        #character {
+            position: absolute;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 350px;
+            max-height: 65vh;
+
+            object-fit: contain;
+        }
+
+        #dialogue-box {
+            position: absolute;
+            left: 5%;
+            right: 5%;
+            bottom: 25px;
+
+            min-height: 180px;
+
+            background: rgba(0,0,0,0.85);
+            border: 2px solid white;
+            border-radius: 10px;
+
+            padding: 25px;
+        }
+
+        #name {
+            position: absolute;
+            top: -30px;
+            left: 20px;
+
+            background: #222;
+            border: 2px solid white;
+            border-radius: 6px;
+
+            padding: 8px 25px;
+
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        #dialogue {
+            font-size: 22px;
+            line-height: 1.5;
+            margin-top: 15px;
+        }
+
+        #input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        #player-input {
+            flex: 1;
+
+            padding: 12px;
+
+            background: #222;
+            color: white;
+
+            border: 1px solid #aaa;
+            border-radius: 5px;
+
+            font-size: 16px;
+        }
+
+        #send {
+            padding: 12px 25px;
+
+            background: #7c5cff;
+            color: white;
+
+            border: none;
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        #send:hover {
+            background: #967cff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="game">
+
+        <!-- Character placeholder -->
+        <img
+            id="character"
+            src="https://placehold.co/350x600/6b4c8a/ffffff?text=CHARACTER"
+            alt="Character"
+        >
+
+        <!-- Dialogue -->
+        <div id="dialogue-box">
+
+            <div id="name">
+                girl?
+            </div>
+
+            <div id="dialogue">
+               hai hai hai ! welcome to my space, feel free to ask me anything... 
+            </div>
+
+            <div id="input-area">
+
+                <input
+                    id="player-input"
+                    type="text"
+                    placeholder= typing...
+                >
+
+                <button id="send">
+                    Send
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
