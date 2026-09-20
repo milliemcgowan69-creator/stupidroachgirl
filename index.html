@@ -7,161 +7,731 @@
     <title>My Visual Novel</title>
 
     <style>
+        /* =========================================
+           2000s VISUAL NOVEL STYLE
+        ========================================= */
+
         * {
             box-sizing: border-box;
         }
 
+        html,
         body {
             margin: 0;
-            background: #111;
-            color: white;
-            font-family: Georgia, serif;
-            height: 100vh;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
         }
 
+        body {
+            overflow: hidden;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            background: #080914;
+            color: white;
+        }
+
+
+        /* =========================================
+           GAME
+        ========================================= */
+
         #game {
-            height: 100vh;
             position: relative;
+
+            width: 100vw;
+            height: 100vh;
+
+            overflow: hidden;
 
             background:
                 linear-gradient(
-                    rgba(0,0,0,0.25),
-                    rgba(0,0,0,0.45)
+                    rgba(20, 25, 55, 0.15),
+                    rgba(5, 7, 20, 0.35)
                 ),
-                url("https://placehold.co/1920x1080/202040/ffffff?text=BACKGROUND");
+                url("https://placehold.co/1920x1080/30365c/ffffff?text=BACKGROUND");
 
             background-size: cover;
             background-position: center;
         }
 
-        #character {
-            position: absolute;
-            bottom: 180px;
-            left: 50%;
-            transform: translateX(-50%);
 
-            width: 350px;
-            max-height: 65vh;
+        /* =========================================
+           OLD SCHOOL SCREEN EFFECT
+        ========================================= */
+
+        #game::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(255,255,255,0.015) 0px,
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px,
+                    transparent 3px
+                );
+
+            z-index: 50;
+        }
+
+
+        /* =========================================
+           TOP UI BAR
+        ========================================= */
+
+        #top-bar {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 38px;
+
+            z-index: 20;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 12px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #5667a0 0%,
+                    #303c70 45%,
+                    #171d43 100%
+                );
+
+            border-bottom: 2px solid #8996c7;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.5);
+        }
+
+
+        #game-title {
+            font-family: Arial, sans-serif;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            text-shadow: 1px 1px #000;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================================
+           CHARACTER SPRITE
+        ========================================= */
+
+        #character-area {
+            position: absolute;
+
+            left: 3%;
+            bottom: 190px;
+
+            width: 42%;
+            height: 68%;
+
+            z-index: 5;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+
+            pointer-events: none;
+        }
+
+
+        #character {
+            width: auto;
+            height: 100%;
+
+            max-width: 100%;
 
             object-fit: contain;
+
+            filter:
+                drop-shadow(5px 7px 5px rgba(0,0,0,0.7));
+
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
         }
+
+
+        /* =========================================
+           DIALOGUE WINDOW
+        ========================================= */
 
         #dialogue-box {
             position: absolute;
-            left: 5%;
-            right: 5%;
-            bottom: 25px;
 
-            min-height: 180px;
+            left: 3%;
+            right: 3%;
+            bottom: 22px;
 
-            background: rgba(0,0,0,0.85);
-            border: 2px solid white;
-            border-radius: 10px;
+            min-height: 185px;
 
-            padding: 25px;
+            z-index: 10;
+
+            padding: 38px 28px 22px 28px;
+
+            /*
+                Dark translucent blue,
+                very early-2000s VN UI.
+            */
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(30, 40, 82, 0.94),
+                    rgba(7, 10, 30, 0.96)
+                );
+
+            border: 2px solid #9ba9dc;
+
+            border-radius: 5px;
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.35),
+                inset 0 0 25px rgba(70,90,180,0.25),
+                0 5px 20px rgba(0,0,0,0.75);
         }
+
+
+        /* Inner decorative border */
+
+        #dialogue-box::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 5px;
+
+            border: 1px solid rgba(150,165,220,0.35);
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           CHARACTER NAME
+        ========================================= */
 
         #name {
             position: absolute;
-            top: -30px;
+
             left: 20px;
+            top: -22px;
 
-            background: #222;
-            border: 2px solid white;
-            border-radius: 6px;
+            min-width: 150px;
 
-            padding: 8px 25px;
+            padding: 7px 25px;
 
+            text-align: center;
+
+            font-size: 19px;
             font-weight: bold;
-            font-size: 20px;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #6878b8,
+                    #303d78 50%,
+                    #1b2452
+                );
+
+            border: 2px solid #b6c1ea;
+
+            border-radius: 4px;
+
+            box-shadow:
+                inset 0 1px rgba(255,255,255,0.5),
+                2px 3px 8px rgba(0,0,0,0.6);
+
+            text-shadow:
+                1px 1px 2px black;
         }
+
+
+        /* =========================================
+           DIALOGUE TEXT
+        ========================================= */
 
         #dialogue {
-            font-size: 22px;
-            line-height: 1.5;
-            margin-top: 15px;
+            position: relative;
+
+            min-height: 75px;
+
+            color: #f1f2ff;
+
+            font-size: clamp(18px, 2vw, 23px);
+
+            line-height: 1.55;
+
+            text-shadow:
+                1px 1px 2px black;
+
+            padding: 5px 8px;
         }
 
+
+        /* =========================================
+           PLAYER INPUT
+        ========================================= */
+
         #input-area {
+            position: relative;
+
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+
+            gap: 8px;
+
+            margin-top: 5px;
         }
+
 
         #player-input {
             flex: 1;
 
-            padding: 12px;
+            height: 40px;
 
-            background: #222;
+            padding: 8px 12px;
+
             color: white;
 
-            border: 1px solid #aaa;
-            border-radius: 5px;
+            font-family:
+                Arial,
+                sans-serif;
 
-            font-size: 16px;
+            font-size: 15px;
+
+            background:
+                linear-gradient(
+                    #11172d,
+                    #080b19
+                );
+
+            border: 1px solid #7d8bc2;
+
+            border-radius: 3px;
+
+            outline: none;
+
+            box-shadow:
+                inset 0 2px 5px rgba(0,0,0,0.7);
         }
 
-        #send {
-            padding: 12px 25px;
 
-            background: #7c5cff;
+        #player-input:focus {
+            border-color: #b7c5ff;
+
+            box-shadow:
+                0 0 6px rgba(120,150,255,0.5),
+                inset 0 2px 5px rgba(0,0,0,0.7);
+        }
+
+
+        /* =========================================
+           SEND BUTTON
+        ========================================= */
+
+        #send {
+            width: 100px;
+
             color: white;
 
-            border: none;
-            border-radius: 5px;
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-weight: bold;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #7385c9 0%,
+                    #465696 45%,
+                    #252e61 100%
+                );
+
+            border: 2px solid #aab7e4;
+
+            border-radius: 4px;
 
             cursor: pointer;
 
-            font-size: 16px;
+            text-shadow:
+                1px 1px 2px black;
+
+            box-shadow:
+                inset 0 1px rgba(255,255,255,0.4),
+                2px 2px 5px rgba(0,0,0,0.5);
         }
 
+
         #send:hover {
-            background: #967cff;
+            background:
+                linear-gradient(
+                    to bottom,
+                    #8b9ce0,
+                    #5367ae,
+                    #303b78
+                );
+        }
+
+
+        #send:active {
+            transform: translateY(1px);
+        }
+
+
+        /* =========================================
+           MENU BUTTONS
+        ========================================= */
+
+        #menu {
+            position: absolute;
+
+            top: 50px;
+            right: 15px;
+
+            z-index: 30;
+
+            display: flex;
+            gap: 5px;
+        }
+
+
+        .menu-button {
+            padding: 5px 10px;
+
+            color: #e5e9ff;
+
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+
+            background:
+                linear-gradient(
+                    #5667a0,
+                    #222c59
+                );
+
+            border: 1px solid #8997ca;
+
+            border-radius: 3px;
+
+            cursor: pointer;
+        }
+
+
+        .menu-button:hover {
+            color: white;
+
+            background:
+                linear-gradient(
+                    #7182c0,
+                    #344274
+                );
+        }
+
+
+        /* =========================================
+           DECORATIVE CORNER
+        ========================================= */
+
+        .corner {
+            position: absolute;
+
+            width: 18px;
+            height: 18px;
+
+            border-color: #aebce9;
+            border-style: solid;
+
+            z-index: 15;
+
+            pointer-events: none;
+        }
+
+
+        .corner.top-left {
+            top: 7px;
+            left: 7px;
+
+            border-width: 2px 0 0 2px;
+        }
+
+
+        .corner.top-right {
+            top: 7px;
+            right: 7px;
+
+            border-width: 2px 2px 0 0;
+        }
+
+
+        .corner.bottom-left {
+            bottom: 7px;
+            left: 7px;
+
+            border-width: 0 0 2px 2px;
+        }
+
+
+        .corner.bottom-right {
+            bottom: 7px;
+            right: 7px;
+
+            border-width: 0 2px 2px 0;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            #character-area {
+                left: 0;
+
+                width: 55%;
+
+                bottom: 245px;
+
+                height: 48%;
+            }
+
+            #dialogue-box {
+                left: 2%;
+                right: 2%;
+
+                bottom: 10px;
+
+                min-height: 220px;
+
+                padding: 35px 15px 15px;
+            }
+
+            #dialogue {
+                font-size: 17px;
+            }
+
+            #input-area {
+                flex-direction: column;
+            }
+
+            #send {
+                width: 100%;
+                height: 38px;
+            }
+
+            #menu {
+                display: none;
+            }
         }
     </style>
 </head>
 
+
 <body>
 
-    <div id="game">
+    <main id="game">
 
-        <!-- Character placeholder -->
-        <img
-            id="character"
-            src="https://placehold.co/350x600/6b4c8a/ffffff?text=CHARACTER"
-            alt="Character"
-        >
+        <!-- Top title bar -->
+        <div id="top-bar">
+            <div id="game-title">
+                ★ MY VISUAL NOVEL ★
+            </div>
+        </div>
 
-        <!-- Dialogue -->
-        <div id="dialogue-box">
+
+        <!-- Small menu buttons -->
+        <div id="menu">
+
+            <button class="menu-button">
+                SAVE
+            </button>
+
+            <button class="menu-button">
+                LOAD
+            </button>
+
+            <button class="menu-button">
+                CONFIG
+            </button>
+
+        </div>
+
+
+        <!-- Decorative corners -->
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+
+        <!-- =====================================
+             CHARACTER
+        ====================================== -->
+
+        <div id="character-area">
+
+            <!--
+                Replace this URL with your character sprite.
+
+                Example:
+
+                images/alex.png
+
+                The sprite will stay on the LEFT.
+            -->
+
+            <img
+                id="character"
+                src="https://placehold.co/500x800/624d80/ffffff?text=CHARACTER+SPRITE"
+                alt="Character sprite"
+            >
+
+        </div>
+
+
+        <!-- =====================================
+             DIALOGUE
+        ====================================== -->
+
+        <section id="dialogue-box">
 
             <div id="name">
-                girl?
+                Alex
             </div>
 
+
             <div id="dialogue">
-               hai hai hai ! welcome to my space, feel free to ask me anything... 
+                Hey... you're finally here.
+
+                <br><br>
+
+                This is placeholder dialogue.
+                Type something below and eventually
+                I'll respond using AI.
             </div>
+
 
             <div id="input-area">
 
                 <input
                     id="player-input"
                     type="text"
-                    placeholder= typing...
+                    placeholder="What do you say?"
                 >
 
                 <button id="send">
-                    Send
+                    SEND
                 </button>
 
             </div>
 
-        </div>
+        </section>
 
-    </div>
+    </main>
+
+
+    <script>
+
+        /* =========================================
+           TEMPORARY RESPONSE SYSTEM
+
+           This is NOT connected to AI yet.
+
+           We're using it to make sure the interface
+           works before connecting the AI backend.
+        ========================================= */
+
+
+        const input =
+            document.getElementById("player-input");
+
+        const send =
+            document.getElementById("send");
+
+        const dialogue =
+            document.getElementById("dialogue");
+
+
+        send.addEventListener("click", respond);
+
+
+        input.addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+                respond();
+            }
+
+        });
+
+
+        function respond() {
+
+            const message =
+                input.value.trim();
+
+
+            if (!message) {
+                return;
+            }
+
+
+            /*
+                Show the player's message.
+            */
+
+            dialogue.innerHTML =
+                "<strong>You:</strong> " +
+                escapeHTML(message) +
+                "<br><br>" +
+
+                "<strong>Alex:</strong> " +
+                "That's interesting... " +
+                "I'm still waiting for my AI brain to be connected.";
+
+
+            input.value = "";
+
+            input.focus();
+        }
+
+
+        /*
+            Prevent HTML from being inserted through
+            the player's message.
+        */
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = text;
+
+            return div.innerHTML;
+        }
+
+    </script>
 
 </body>
 </html>
